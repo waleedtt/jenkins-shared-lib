@@ -1,5 +1,12 @@
 @Library('sharedLibrary@master') _
 
+import hudson.node_monitors.*
+import hudson.slaves.*
+import java.*
+import javax.activation.*
+import thread.*
+import java.lang.*
+
 def age=40;
 
 pipeline {
