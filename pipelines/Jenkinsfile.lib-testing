@@ -20,7 +20,7 @@ pipeline {
 
 
                 def age=40
-                echo $age
+                echo ${age}
               }
           }
       }
