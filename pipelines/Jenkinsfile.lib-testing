@@ -6,17 +6,21 @@ pipeline {
   stages {
       stage('test') {
           steps {
-            sh """
-                  echo testing
-              """
-              test("John")
+              // sh """
+              //     echo testing
+              // """
+              // test("John")
 
               script{
-                test.myFunction("Alex")
-                test.myFunction("Alex1")
-                test.myFunctionMap(name: "Doe", status: "Not known")
-                test.myCLassFunction()
-                test.callOther(name: "Doe", dayOfWeek: "Not known")
+                // test.myFunction("Alex")
+                // test.myFunction("Alex1")
+                // test.myFunctionMap(name: "Doe", status: "Not known")
+                // test.myCLassFunction()
+                // test.callOther(name: "Doe", dayOfWeek: "Not known")
+
+
+                def age=40
+                echo $age
               }
           }
       }
