@@ -23,6 +23,8 @@ pipeline {
 
                 
                 echo "${age}"
+
+                echo "${10 + 5}"
               }
           }
       }
