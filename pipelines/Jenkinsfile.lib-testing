@@ -19,7 +19,7 @@ pipeline {
                 // test.callOther(name: "Doe", dayOfWeek: "Not known")
 
 
-                def age=40
+                def age=40;
                 echo ${age}
               }
           }
