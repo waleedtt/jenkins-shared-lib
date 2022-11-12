@@ -22,7 +22,7 @@ pipeline {
 
 
                 
-                echo "test"
+                echo age
               }
           }
       }
