@@ -23,8 +23,11 @@ pipeline {
 
                 
                 echo "${age}"
-
+                def name="test";
+                echo "${name}"
                 echo "${10 + 5}"
+
+                echo "${Math.floor(2.45)}"
               }
           }
       }
