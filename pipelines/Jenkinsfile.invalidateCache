@@ -2,15 +2,22 @@
 
 
 pipeline {
-  agent any
-  
-  stages {
-      stage('test') {
-          steps {
-              script{
+    agent any
+
+    environment {
+        TEST     = credentials('temp-60')
+    }
+
+
+    stages {
+        stage('test') {
+            steps {
+                sh 'echo $TEST'
+                
+                script{
                 echo "teest"
-              }
-          }
-      }
-  }   
+                }
+            }
+        }
+    }   
 }
