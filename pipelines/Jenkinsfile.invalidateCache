@@ -19,17 +19,19 @@ pipeline {
     stages {
         stage('list') {
 
-            gcsKey = ""
-            if (params.REPOSITORY != "") {                                          
-                gcsKey = params.REPOSITORY
-            } 
+            script{
+                gcsKey = ""
+                if (params.REPOSITORY != "") {                                          
+                    gcsKey = params.REPOSITORY
+                } 
 
-            if (gcsKey != "" && params.BRANCH != "") {
-                gcsKey = gcsKey + "/" + params.BRANCH
-            }
+                if (gcsKey != "" && params.BRANCH != "") {
+                    gcsKey = gcsKey + "/" + params.BRANCH
+                }
 
-            if (gcsKey != "" && params.KEY != "") {
-                gcsKey = gcsKey + "/" + params.KEY
+                if (gcsKey != "" && params.KEY != "") {
+                    gcsKey = gcsKey + "/" + params.KEY
+                }
             }
 
             steps {
