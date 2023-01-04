@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script{
 
-                    def cacheBinary = "/tmp/cache"
+                    def cacheBinary = "./cache"
                     def cmdArgs = ""
 
                     if (params.REPOSITORY != "") {                                          
@@ -37,18 +37,18 @@ pipeline {
                     }
 
                     sh """
-                        #gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
+                        gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
                         ##export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS
                         ##gcloud config set project $PROJECT
-                        #gsutil cp gs://my-test-bucket-for-work/cache ./
-                        #chmod +x cache && ./cache list
-                        #cp cache /tmp/cache
+                        gsutil cp gs://my-test-bucket-for-work/cache ./${cacheBinary}
+                        chmod +x ${cacheBinary}
+                        ##cp cache /tmp/cache
                         ##gcloud auth revoke temp-60@delta-pagoda-354106.iam.gserviceaccount.com
 
-                        echo ${cmdArgs}
-                        echo ${params.REPOSITORY}
-                        echo ${params.BRANCH}
-                        echo ${params.KEY} 
+                        #echo ${cmdArgs}
+                        #echo ${params.REPOSITORY}
+                        #echo ${params.BRANCH}
+                        #echo ${params.KEY} 
                         ${cacheBinary} list ${cmdArgs}
                     """
                 }
