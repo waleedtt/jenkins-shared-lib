@@ -29,7 +29,7 @@ pipeline {
                     def cmdArgs = ""
 
                     if (params.REPOSITORY != "") {                                          
-                        cmdArgs = params.REPOSITORY
+                        cmdArgs = "--repository " + params.REPOSITORY
                     } 
 
                     if (cmdArgs != "" && params.BRANCH != "") {
