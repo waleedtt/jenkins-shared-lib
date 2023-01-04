@@ -24,7 +24,7 @@ pipeline {
                     def cmdArgs = ""
 
                     if (params.REPOSITORY != "") {                                          
-                        cmdArgs = "--repository '" + params.REPOSITORY + "'"
+                        cmdArgs = "--repository \'" + params.REPOSITORY + "\'"
                     } 
 
                     if (cmdArgs != "" && params.BRANCH != "") {
