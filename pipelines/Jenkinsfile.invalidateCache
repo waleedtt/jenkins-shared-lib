@@ -20,7 +20,7 @@ pipeline {
                     #gcloud config set project $PROJECT
                     gsutil cp gs://my-test-bucket-for-work/cache ./
                     chmod +x cache && ./cache list
-                    #cloud auth revoke temp-60@delta-pagoda-354106.iam.gserviceaccount.com
+                    cloud auth revoke temp-60@delta-pagoda-354106.iam.gserviceaccount.com
                 """
             }
         }
