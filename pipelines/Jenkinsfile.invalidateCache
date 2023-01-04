@@ -20,6 +20,7 @@ pipeline {
                     cat /etc/passwd
                     whoami
                     ls -la ~
+                    gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
                     gsutil ls
                 """
                 // script{
