@@ -48,7 +48,7 @@ pipeline {
                         #echo ${params.REPOSITORY}
                         #echo ${params.BRANCH}
                         #echo ${params.KEY} 
-                        ${cacheBinary} invalidate ${cmdArgs}
+                        ${cacheBinary} list ${cmdArgs}
                     """
                 }
             }
