@@ -24,15 +24,15 @@ pipeline {
                     def cmdArgs = ""
 
                     if (params.REPOSITORY != "") {                                          
-                        cmdArgs = "--repository \'" + params.REPOSITORY + "\'"
+                        cmdArgs = "--repository " + params.REPOSITORY
                     } 
 
                     if (cmdArgs != "" && params.BRANCH != "") {
-                        cmdArgs = cmdArgs + " --branch '" + params.BRANCH + "'"
+                        cmdArgs = cmdArgs + " --branch " + params.BRANCH
                     }
 
                     if (cmdArgs != "" && params.KEY != "") {
-                        cmdArgs = cmdArgs + " --key '" + params.KEY + "'"
+                        cmdArgs = cmdArgs + " --key " + params.KEY
                     }
 
                     sh """
@@ -44,7 +44,7 @@ pipeline {
                         ##cp cache /tmp/cache
                         ##gcloud auth revoke temp-60@delta-pagoda-354106.iam.gserviceaccount.com
 
-                        echo ${cmdArgs} > /tmp/test.txt
+                        #echo ${cmdArgs}
                         #echo ${params.REPOSITORY}
                         #echo ${params.BRANCH}
                         #echo ${params.KEY} 
