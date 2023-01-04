@@ -53,7 +53,7 @@ pipeline {
                         echo ${params.REPOSITORY}
                         echo ${params.BRANCH}
                         echo ${params.KEY} 
-                        ${cacheBinary} list
+                        ${cacheBinary} list ${cmdArgs}
                     """
                 }
             }
