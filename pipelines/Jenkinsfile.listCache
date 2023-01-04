@@ -5,9 +5,9 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'REPOSITORY', defaultValue: '', description: 'REPOSITORY')
-        string(name: 'BRANCH', defaultValue: '', description: 'BRANCH')
-        string(name: 'KEY', defaultValue: '', description: 'KEY')
+        string(name: 'REPOSITORY', defaultValue: '', description: 'Repository name, for listing all the repository caches')
+        string(name: 'BRANCH', defaultValue: '', description: 'Repository branch, if any specific branch caches needs to be listed')
+        string(name: 'KEY', defaultValue: '', description: 'Key name, if any specific key needs to be listed')
     }
 
     environment {

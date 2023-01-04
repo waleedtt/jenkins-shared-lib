@@ -5,9 +5,9 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'REPOSITORY', defaultValue: '', description: 'REPOSITORY')
-        string(name: 'BRANCH', defaultValue: '', description: 'BRANCH')
-        string(name: 'KEY', defaultValue: '', description: 'KEY')
+        string(name: 'REPOSITORY', defaultValue: '', description: 'Repository name where the cache needs to be deleted')
+        string(name: 'BRANCH', defaultValue: '', description: 'Repository branch where the cache needs to be deleted')
+        string(name: 'KEY', defaultValue: '', description: 'Key name, key prefix of the cache needs to be deleted')
     }
 
     environment {
