@@ -32,11 +32,11 @@ pipeline {
                         cmdArgs = params.REPOSITORY
                     } 
 
-                    if (gcsKey != "" && params.BRANCH != "") {
+                    if (cmdArgs != "" && params.BRANCH != "") {
                         cmdArgs = gcsKey + "/" + params.BRANCH
                     }
 
-                    if (gcsKey != "" && params.KEY != "") {
+                    if (cmdArgs != "" && params.KEY != "") {
                         cmdArgs = gcsKey + "/" + params.KEY
                     }
 
