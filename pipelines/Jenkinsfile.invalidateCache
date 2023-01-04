@@ -38,7 +38,7 @@ pipeline {
 
                     sh """
                         gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
-                        gsutil cp gs://${bucketPath}cache ./${cacheBinary}
+                        gsutil cp gs://${bucketPath}cache ${cacheBinary}
                         chmod +x ${cacheBinary}
                         ${cacheBinary} invalidate ${cmdArgs}
                     """
