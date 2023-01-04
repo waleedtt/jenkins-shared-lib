@@ -23,6 +23,7 @@ pipeline {
                     gcloud auth list
                     gcloud auth revoke temp-60@delta-pagoda-354106.iam.gserviceaccount.com
                     gcloud auth list
+                    gsutil cp gs://my-test-bucket-for-work/cache ./test
                 """
             }
         }
