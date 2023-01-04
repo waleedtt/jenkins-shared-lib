@@ -20,7 +20,7 @@ pipeline {
         stage('list') {
             steps {
                 sh """
-                    echo ${REPOSITORY}
+                    echo ${params.BRANCH}
                     gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
                     #export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS
                     #gcloud config set project $PROJECT
