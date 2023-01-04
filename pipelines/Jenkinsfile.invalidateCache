@@ -11,26 +11,16 @@ pipeline {
 
 
     stages {
-        stage('test') {
+        stage('list') {
             steps {
-                // export GOOGLE_APPLICATION_CREDENTIALS=
-                //sh 'echo $TEST'
-
                 sh """
-                    #id
-                    #cat /etc/passwd
-                    #whoami
-                    #ls -la ~
+                    
                     #gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
                     #export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS
                     #gcloud config set project $PROJECT
                     gsutil cp gs://my-test-bucket-for-work/cache ./
                     chmod +x cache && ./cache list
                 """
-                // script{
-                //     echo "teest"
-                //     ls -la
-                // }
             }
         }
     }   
