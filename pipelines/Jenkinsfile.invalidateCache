@@ -24,11 +24,11 @@ pipeline {
                 gcsKey = params.REPOSITORY
             } 
 
-            if gcsKey != "" && params.BRANCH != "" {
+            if (gcsKey != "" && params.BRANCH != "") {
                 gcsKey = gcsKey + "/" + params.BRANCH
             }
 
-            if gcsKey != "" && params.KEY != "" {
+            if (gcsKey != "" && params.KEY != "") {
                 gcsKey = gcsKey + "/" + params.KEY
             }
 
