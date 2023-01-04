@@ -33,11 +33,11 @@ pipeline {
                     } 
 
                     if (cmdArgs != "" && params.BRANCH != "") {
-                        cmdArgs = gcsKey + "/" + params.BRANCH
+                        cmdArgs = cmdArgs + "/" + params.BRANCH
                     }
 
                     if (cmdArgs != "" && params.KEY != "") {
-                        cmdArgs = gcsKey + "/" + params.KEY
+                        cmdArgs = cmdArgs + "/" + params.KEY
                     }
 
                     sh """
