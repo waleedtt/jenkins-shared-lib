@@ -5,7 +5,7 @@ pipeline {
     agent any
 
     environment {
-        CACHE_BINARY_GCS     = credentials('temp-60')
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('temp-60')
     }
 
 
@@ -13,12 +13,16 @@ pipeline {
         stage('test') {
             steps {
                 // export GOOGLE_APPLICATION_CREDENTIALS=
-                sh 'echo $TEST'
+                //sh 'echo $TEST'
 
-                script{
-                    echo "teest"
-                    ls -la
-                }
+                sh """
+
+                    gsutil ls
+                """
+                // script{
+                //     echo "teest"
+                //     ls -la
+                // }
             }
         }
     }   
