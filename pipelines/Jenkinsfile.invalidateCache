@@ -13,7 +13,7 @@ pipeline {
         stage('test') {
             steps {
                 // export GOOGLE_APPLICATION_CREDENTIALS=
-                sh 'echo $TEST > /tmp/test'
+                sh 'echo $TEST'
 
                 script{
                     echo "teest"
