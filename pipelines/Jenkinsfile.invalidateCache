@@ -1,0 +1,16 @@
+@Library('sharedLibrary@master') _
+
+
+pipeline {
+  agent any
+  
+  stages {
+      stage('test') {
+          steps {
+              script{
+                echo fine
+              }
+          }
+      }
+  }   
+}
