@@ -20,7 +20,7 @@ pipeline {
                     cat /etc/passwd
                     whoami
                     ls -la ~
-                    #gsutil ls
+                    gsutil ls
                 """
                 // script{
                 //     echo "teest"
