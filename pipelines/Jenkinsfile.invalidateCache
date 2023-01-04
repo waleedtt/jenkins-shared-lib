@@ -18,6 +18,20 @@ pipeline {
 
     stages {
         stage('list') {
+
+            gcsKey = ""
+            if (params.REPOSITORY != "") {                                          
+                gcsKey = params.REPOSITORY
+            } 
+
+            if gcsKey != "" && params.BRANCH != "" {
+                gcsKey = gcsKey + "/" + params.BRANCH
+            }
+
+            if gcsKey != "" && params.KEY != "" {
+                gcsKey = gcsKey + "/" + params.KEY
+            }
+
             steps {
                 sh """
                     #gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
@@ -28,6 +42,7 @@ pipeline {
                     #cp cache /tmp/cache
                     ##gcloud auth revoke temp-60@delta-pagoda-354106.iam.gserviceaccount.com
 
+                    echo ${gcsKey}
                     echo ${params.REPOSITORY}
                     echo ${params.BRANCH}
                     echo ${params.KEY} 
