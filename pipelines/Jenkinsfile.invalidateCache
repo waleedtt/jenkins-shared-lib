@@ -15,7 +15,6 @@ pipeline {
         PROJECT="delta-pagoda-354106"
     }
 
-
     stages {
         stage('list') {
             steps {
@@ -25,15 +24,15 @@ pipeline {
                     def cmdArgs = ""
 
                     if (params.REPOSITORY != "") {                                          
-                        cmdArgs = "--repository " + params.REPOSITORY
+                        cmdArgs = "--repository '" + params.REPOSITORY + "'"
                     } 
 
                     if (cmdArgs != "" && params.BRANCH != "") {
-                        cmdArgs = cmdArgs + " --branch " + params.BRANCH
+                        cmdArgs = cmdArgs + " --branch '" + params.BRANCH + "'"
                     }
 
                     if (cmdArgs != "" && params.KEY != "") {
-                        cmdArgs = cmdArgs + " --key " + params.KEY
+                        cmdArgs = cmdArgs + " --key '" + params.KEY + "'"
                     }
 
                     sh """
