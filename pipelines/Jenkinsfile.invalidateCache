@@ -6,7 +6,7 @@ pipeline {
 
     environment {
         GOOGLE_APPLICATION_CREDENTIALS = credentials('temp-60')
-        PROJECT="delta-pagoda"
+        PROJECT="delta-pagoda-354106"
     }
 
 
@@ -22,7 +22,7 @@ pipeline {
                     whoami
                     ls -la ~
                     gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
-                    export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS
+                    #export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS
                     gcloud config set project $PROJECT
                     gsutil ls
                 """
