@@ -12,7 +12,6 @@ pipeline {
 
     environment {
         GOOGLE_APPLICATION_CREDENTIALS = credentials('temp-60')
-        PROJECT="delta-pagoda-354106"
     }
 
     stages {

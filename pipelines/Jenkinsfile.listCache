@@ -12,7 +12,6 @@ pipeline {
 
     environment {
         GOOGLE_APPLICATION_CREDENTIALS = credentials('temp-60')
-        PROJECT="delta-pagoda-354106"
     }
 
     stages {
@@ -21,6 +20,7 @@ pipeline {
                 script{
 
                     def cacheBinary = "./cache"
+                    def bucketPath= "gh-cache-storage-dev/cache_binary/"
                     def cmdArgs = ""
 
                     if (params.REPOSITORY != "") {                                          
@@ -37,17 +37,8 @@ pipeline {
 
                     sh """
                         gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
-                        ##export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS
-                        ##gcloud config set project $PROJECT
-                        gsutil cp gs://my-test-bucket-for-work/cache ./${cacheBinary}
+                        gsutil cp gs://${bucketPath}cache ${cacheBinary}
                         chmod +x ${cacheBinary}
-                        ##cp cache /tmp/cache
-                        ##gcloud auth revoke temp-60@delta-pagoda-354106.iam.gserviceaccount.com
-
-                        #echo ${cmdArgs}
-                        #echo ${params.REPOSITORY}
-                        #echo ${params.BRANCH}
-                        #echo ${params.KEY} 
                         ${cacheBinary} list ${cmdArgs}
                     """
                 }
