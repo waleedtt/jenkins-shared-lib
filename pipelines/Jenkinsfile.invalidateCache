@@ -29,6 +29,8 @@ pipeline {
                     ##gcloud auth revoke temp-60@delta-pagoda-354106.iam.gserviceaccount.com
 
                     echo ${params.REPOSITORY}
+                    echo ${params.BRANCH}
+                    echo ${params.KEY} 
                     /tmp/cache list
                 """
             }
