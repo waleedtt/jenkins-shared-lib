@@ -33,11 +33,11 @@ pipeline {
                     } 
 
                     if (cmdArgs != "" && params.BRANCH != "") {
-                        cmdArgs = cmdArgs + " --branch" + params.BRANCH
+                        cmdArgs = cmdArgs + " --branch " + params.BRANCH
                     }
 
                     if (cmdArgs != "" && params.KEY != "") {
-                        cmdArgs = cmdArgs + " --key" + params.KEY
+                        cmdArgs = cmdArgs + " --key " + params.KEY
                     }
 
                     sh """
