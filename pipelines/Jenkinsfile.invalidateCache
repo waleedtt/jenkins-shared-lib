@@ -16,7 +16,7 @@ pipeline {
                 //sh 'echo $TEST'
 
                 sh """
-
+                    whoami
                     gsutil ls
                 """
                 // script{
