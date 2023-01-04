@@ -5,17 +5,19 @@ pipeline {
     agent any
 
     environment {
-        TEST     = credentials('temp-60')
+        CACHE_BINARY_GCS     = credentials('temp-60')
     }
 
 
     stages {
         stage('test') {
             steps {
+                // export GOOGLE_APPLICATION_CREDENTIALS=
                 sh 'echo $TEST > /tmp/test'
 
                 script{
-                echo "teest"
+                    echo "teest"
+                    ls -la
                 }
             }
         }
