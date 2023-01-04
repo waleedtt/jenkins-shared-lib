@@ -16,8 +16,10 @@ pipeline {
                 //sh 'echo $TEST'
 
                 sh """
+                    id
+                    cat /etc/passwd
                     whoami
-                    gsutil ls
+                    #gsutil ls
                 """
                 // script{
                 //     echo "teest"
