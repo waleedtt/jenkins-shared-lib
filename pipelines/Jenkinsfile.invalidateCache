@@ -18,23 +18,22 @@ pipeline {
 
     stages {
         stage('list') {
-
-            script{
-                gcsKey = ""
-                if (params.REPOSITORY != "") {                                          
-                    gcsKey = params.REPOSITORY
-                } 
-
-                if (gcsKey != "" && params.BRANCH != "") {
-                    gcsKey = gcsKey + "/" + params.BRANCH
-                }
-
-                if (gcsKey != "" && params.KEY != "") {
-                    gcsKey = gcsKey + "/" + params.KEY
-                }
-            }
-
             steps {
+                script{
+                    gcsKey = ""
+                    if (params.REPOSITORY != "") {                                          
+                        gcsKey = params.REPOSITORY
+                    } 
+
+                    if (gcsKey != "" && params.BRANCH != "") {
+                        gcsKey = gcsKey + "/" + params.BRANCH
+                    }
+
+                    if (gcsKey != "" && params.KEY != "") {
+                        gcsKey = gcsKey + "/" + params.KEY
+                    }
+                }
+
                 sh """
                     #gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
                     ##export GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS
