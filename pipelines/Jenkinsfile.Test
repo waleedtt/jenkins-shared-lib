@@ -6,9 +6,9 @@ pipeline {
         stage('Test') {
             steps {
                 sh """
-                ech34o haha
-                sleep 20
                 echo haha
+                #sleep 20
+                #echo haha
                 """
             }
         }
