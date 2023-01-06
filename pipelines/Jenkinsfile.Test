@@ -7,8 +7,8 @@ pipeline {
             steps {
                 sh """
                 echo haha
-                #sleep 20
-                #echo haha
+                sleep 10
+                echo after
                 """
             }
         }
