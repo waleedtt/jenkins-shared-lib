@@ -1,0 +1,43 @@
+@Library('sharedLibrary@master') _
+
+import hudson.node_monitors.*
+import hudson.slaves.*
+import java.*
+import javax.activation.*
+import thread.*
+import java.lang.*
+
+def age=40;
+
+pipeline {
+  agent any
+  
+  stages {
+      stage('test') {
+          steps {
+              // sh """
+              //     echo testing
+              // """
+              // test("John")
+
+              script{
+                // test.myFunction("Alex")
+                // test.myFunction("Alex1")
+                // test.myFunctionMap(name: "Doe", status: "Not known")
+                // test.myCLassFunction()
+                // test.callOther(name: "Doe", dayOfWeek: "Not known")
+
+
+                
+                echo "${age}"
+                def name="test";
+                echo "${name}"
+                echo "${10 + 5}"
+
+                vad=Math.floor(2.45)
+                echo "${vad}"
+              }
+          }
+      }
+  }   
+}

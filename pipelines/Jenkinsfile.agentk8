@@ -1,0 +1,30 @@
+pipeline {
+  agent {
+    kubernetes {
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        spec:
+          securityContext:
+            fsGroup: 1000
+          containers:
+          - name: alpine
+            #image: alpine:latest
+            #image: jenkins/agent:buster-jdk11
+            image: jenkins/inbound-agent
+            command:
+            - cat
+            tty: true
+        '''
+    }
+  }
+  stages {
+    stage('Run version') {
+      steps {
+        container('alpine') {
+          sh 'cat /etc/os-release'
+        }
+      }
+    }
+  }
+}

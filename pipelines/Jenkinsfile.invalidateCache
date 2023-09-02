@@ -1,0 +1,48 @@
+@Library('sharedLibrary@master') _
+
+
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'REPOSITORY', defaultValue: '', description: 'Repository name where the cache needs to be deleted')
+        string(name: 'BRANCH', defaultValue: '', description: 'Repository branch where the cache needs to be deleted')
+        string(name: 'KEY', defaultValue: '', description: 'Key name, key prefix of the cache needs to be deleted')
+    }
+
+    environment {
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('temp-60')
+    }
+
+    stages {
+        stage('list') {
+            steps {
+                script{
+
+                    def cacheBinary = "./cache"
+                    def bucketPath= "gh-cache-storage-dev/cache_binary/"
+                    def cmdArgs = ""
+
+                    if (params.REPOSITORY != "") {                                          
+                        cmdArgs = "--repository " + params.REPOSITORY
+                    } 
+
+                    if (cmdArgs != "" && params.BRANCH != "") {
+                        cmdArgs = cmdArgs + " --branch " + params.BRANCH
+                    }
+
+                    if (cmdArgs != "" && params.KEY != "") {
+                        cmdArgs = cmdArgs + " --key " + params.KEY
+                    }
+
+                    sh """
+                        gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
+                        gsutil cp gs://${bucketPath}cache ${cacheBinary}
+                        chmod +x ${cacheBinary}
+                        ${cacheBinary} invalidate ${cmdArgs}
+                    """
+                }
+            }
+        }
+    }   
+}

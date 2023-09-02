@@ -1,0 +1,17 @@
+pipeline {
+
+    agent {
+        docker { image 'debian:buster-slim' }
+        //docker { image 'public.ecr.aws/lambda/python:3.9' }
+    }
+
+    stages {
+        stage('Test') {
+            steps {
+                sh """
+                    cat /etc/os-release
+                """
+            }
+        }
+    }
+}

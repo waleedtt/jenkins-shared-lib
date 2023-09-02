@@ -1,0 +1,67 @@
+pipeline {
+  agent {
+    kubernetes {
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          labels:
+            agent: jenkins-agent
+          namespace: jenkins
+        spec:
+          serviceAccountName: jenkins-manager 
+          securityContext:
+                runAsUser: 0
+                fsGroup: 0
+                runAsNonRoot: false
+          containers:
+          - name: jenkins-agent
+            image: 142357695348.dkr.ecr.us-east-1.amazonaws.com/jenkins-agent:v1.1
+            command:
+            - cat
+            tty: true
+            resources:
+              requests:
+                cpu: 1
+                memory: 1000Mi
+            volumeMounts:
+            - mountPath: /var/run
+              name: docker-sock-volume
+            - mountPath: /var/jenkins_home
+              name: jenkins-storage  
+          volumes:
+            - name: docker-sock-volume
+              hostPath:
+                path: /var/run
+                type: Directory
+            - name: jenkins-storage
+              persistentVolumeClaim:
+                claimName: jenkins-pvc-new
+        '''
+        defaultContainer 'jenkins-agent'
+    }
+  }
+  stages {
+    stage('Run test') {
+      steps {
+        sh '''
+          #cat /etc/os-release
+          #ls -la /
+          #whoami
+          #curl https://www.google.com/
+          #docker ps
+          echo 'FROM python:3.10.8-slim-bullseye' >> Dockerfile
+          echo 'RUN cat /etc/resolv.conf' >> Dockerfile
+          echo 'RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf' >> Dockerfile
+          echo 'RUN cat /etc/resolv.conf' >> Dockerfile
+          echo 'RUN apt-get update' >> Dockerfile
+          #ls -la
+          #cat Dockerfile
+          #docker build --network=host . -t wld-test-delete-after
+          #docker run busybox nslookup google.com
+          docker network ls
+        '''
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    stages {
+        stage('Trigger Branch Build') {
+            steps {
+                script {
+                    build job: 'slave', 
+                    parameters: [
+                        string(name: 'TEST_PARAM', value: String.valueOf(BUILD_NUMBER)),
+                    ]
+                }
+            }
+        }
+    }
+}

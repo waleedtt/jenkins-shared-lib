@@ -1,0 +1,78 @@
+def test = ''
+pipeline {
+  agent {
+    kubernetes {
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          labels:
+            agent: jenkins-agent
+          namespace: jenkins
+        spec:
+          serviceAccountName: jenkins-manager 
+          securityContext:
+                runAsUser: 0
+                fsGroup: 0
+                runAsNonRoot: false
+          containers:
+          - name: jenkins-agent
+            image: 142357695348.dkr.ecr.us-east-1.amazonaws.com/jenkins-agent:v1.1
+            command:
+            - cat
+            tty: true
+            resources:
+              requests:
+                cpu: 1
+                memory: 1000Mi
+            volumeMounts:
+            - mountPath: /var/run
+              name: docker-sock-volume
+            - mountPath: /var/jenkins_home
+              name: jenkins-storage  
+          volumes:
+            - name: docker-sock-volume
+              hostPath:
+                path: /var/run
+                type: Directory
+            - name: jenkins-storage
+              persistentVolumeClaim:
+                claimName: jenkins-pvc-new
+        '''
+        defaultContainer 'jenkins-agent'
+    }
+  }
+
+  environment {
+        AWS_ACCESS_KEY_ID     = credentials('aws_access_key_id')
+        AWS_SECRET_ACCESS_KEY = credentials('aws_secret_access_key')
+        AWS_DEFAULT_REGION    = 'us-east-2'
+    }
+  stages {
+    stage('Run test') {
+      steps {
+        script {
+          test = sh (
+            script:'''
+            aws ec2 describe-instances     --filters "Name=instance-state-name,Values=running" "Name=tag-key,Values=Name"     --query 'Reservations[*].Instances[*].{Instance:InstanceId,Name:Tags[?Key==`Name`]|[0].Value,CreatedBy:Tags[?Key==`ENV_CREATOR`]|[0].Value,CreateDate:LaunchTime}'     --output table
+            ''',
+            returnStdout: true
+          )
+          println test
+          sh '''
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"${test}"}' https://hooks.slack.com/services/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
+          '''
+        }
+      }
+    }
+    // end stage
+
+     stage('Run test1') {
+        steps {
+          slackSend channel: '#ondemand-staging-env', sendAsText: true, message: "```${test}```"
+        }
+      }
+      // stage 2
+
+  }
+}
