@@ -10,9 +10,9 @@ pipeline {
         visibleItemCount: 5,
         multiSelectDelimiter: ",",
         groovyScript: """def tags = []
-        // def process, output = new StringBuilder(), error = new StringBuilder()
+        def process, output = new StringBuilder(), error = new StringBuilder()
 
-        // process = ("docker images --filter=reference=testimage --format={{.Tag}}").execute()
+        process = ("docker images --filter=reference=testimage --format={{.Tag}}").execute()
         // process.waitForProcessOutput(output, error)
 
         // if (process.exitValue() == 0) {
