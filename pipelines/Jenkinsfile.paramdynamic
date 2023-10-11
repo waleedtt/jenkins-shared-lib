@@ -1,5 +1,41 @@
 pipeline {
     agent any
+
+    parameters {
+        extendedChoice(
+        name: "IMAGE_TAG",
+        description: "Select existing version or create NEW_BUILD.",
+        defaultValue: "--------",
+        type: "PT_SINGLE_SELECT",
+        visibleItemCount: 5,
+        multiSelectDelimiter: ",",
+        groovyScript: """def tags = []
+        // def process, output = new StringBuilder(), error = new StringBuilder()
+
+        // process = ("docker images --filter=reference=testimage --format={{.Tag}}").execute()
+        // process.waitForProcessOutput(output, error)
+
+        // if (process.exitValue() == 0) {
+        //     tags = output.readLines().collect({
+        //     it.trim()
+        //     })
+
+        //     if (tags.size() > 0) {
+        //     tags = tags.sort();
+        //     tags = tags.reverse(true);
+        //     }
+        //     else {
+        //     tags = []
+        //     }
+        // }
+
+        tags.add(0, "NEW_BUILD")
+        tags.add(0, "--------")
+
+        return tags"""
+        )
+    }
+
     stages {
         stage('Test') {
             steps {
