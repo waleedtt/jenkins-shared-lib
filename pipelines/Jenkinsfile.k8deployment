@@ -1,25 +1,29 @@
 pipeline {
-    agent any
-    stages {
-        stage('Test') {
-            steps {
+  agent any
+  stages {
+    stage('Test') {
+      steps {
 
-script {
+        script {
 
-                    checkout([
-                            $class: 'GitSCM', 
-                            branches: [[name: "master"]], 
-                            doGenerateSubmoduleConfigurations: false, 
-                            extensions: [[$class: 'CleanCheckout']], 
-                            submoduleCfg: [], 
-                            userRemoteConfigs: [[credentialsId: 'k8-image-update', url: 'git@github.com:waleedahmeddev/k8-image-update.git']]
-                    ])
-                } 
-
-                sh """
-                ls -la
-                """
-            }
+          checkout([
+            $class: 'GitSCM',
+            branches: [
+              [name: "master"]
+            ],
+            doGenerateSubmoduleConfigurations: false,
+            extensions: [
+              [$class: 'CleanCheckout']
+            ],
+            submoduleCfg: [],
+            userRemoteConfigs: [
+              [credentialsId: 'k8-image-update', url: 'git@github.com:waleedahmeddev/k8-image-update.git']
+            ]
+          ])
         }
+
+        sh "ls -la"
+      }
     }
+  }
 }
