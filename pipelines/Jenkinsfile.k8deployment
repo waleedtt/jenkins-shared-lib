@@ -28,6 +28,8 @@ pipeline {
             git diff
             git add .
             git commit -m "test"
+            git config user.email "myuser@user.com"
+            git config  user.name "Deployer"
             git push origin master
         """
 
