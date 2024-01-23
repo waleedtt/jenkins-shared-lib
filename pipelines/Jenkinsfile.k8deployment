@@ -26,10 +26,10 @@ pipeline {
             yq --inplace '(.spec.template.spec.containers[] | select(.name=="alpine").image) = "alpine:3.19"' deployment.yml
             git status
             git diff
-            git add .
-            git commit -m "test"
             git config user.email "myuser@user.com"
             git config user.name "Deployer"
+            git add .
+            git commit -m "test"
             git push origin master
         """
 
