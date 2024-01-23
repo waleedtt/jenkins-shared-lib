@@ -22,7 +22,11 @@ pipeline {
           ])
         }
 
-        sh "ls -la"
+        sh """
+            yq --inplace '(.spec.template.spec.containers[] | select(.name=="alpine").image) = "alpine:3.19"' deployment.yml
+            git status
+            git diff
+        """
       }
     }
   }
