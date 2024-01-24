@@ -29,6 +29,7 @@ pipeline {
             git config user.email "myuser@user.com"
             git config user.name "Deployer"
             git show-ref
+            git status
             git add .
             git commit -m "test"
             git push origin master
