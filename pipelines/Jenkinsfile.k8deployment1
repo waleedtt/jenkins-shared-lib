@@ -1,0 +1,57 @@
+pipeline {
+  agent any
+  stages {
+    stage('Test') {
+      steps {
+
+        script {
+
+          checkout([
+            $class: 'GitSCM',
+            branches: [
+              [name: "master"]
+            ],
+            doGenerateSubmoduleConfigurations: false,
+            extensions: [
+              [$class: 'CleanCheckout']
+            ],
+            submoduleCfg: [],
+            userRemoteConfigs: [
+              [credentialsId: 'k8-image-update', url: 'git@github.com:waleedahmeddev/k8-image-update.git']
+            ]
+          ])
+        }
+
+        //withCredentials([sshUserPrivateKey(credentialsId: 'k8-image-update', keyFileVariable: 'SSH_KEY')]) {
+        withCredentials([sshUserPrivateKey(credentialsId: 'k8-image-update', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
+            withEnv(["GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no -o User=${SSH_USER} -i ${SSH_KEY}"]) {
+            sh """
+            git fetch
+            git pull origin master
+            yq --inplace '(.spec.template.spec.containers[] | select(.name=="alpine").image) = "alpine:3.19"' deployment.yml
+            git status
+            #git fetch
+            #git status
+            #git diff
+            #git config user.email "myuser@user.com"
+            #git config user.name "Deployer"
+            #git show-ref
+            #git status
+            #git add .
+            #git commit -m "test"
+            #git push origin master
+            """
+            }
+        }
+        def now = new Date()
+        def time = now.format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
+        println ${time}
+
+        build job: 'dependent-job', 
+        parameters: [
+            string(name: 'TEST_PARAM', value: String.valueOf(BUILD_NUMBER) + " TEST"),
+        ]
+        }
+      }
+    }
+  }
