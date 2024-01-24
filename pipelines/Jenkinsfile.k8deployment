@@ -5,6 +5,9 @@ pipeline {
       steps {
         script {
             sh "echo test"
+            def now = new Date()
+            def time = now.format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
+            println ${time}
         }
       }
     }
