@@ -23,7 +23,8 @@ pipeline {
         }
 
         //withCredentials([sshUserPrivateKey(credentialsId: 'k8-image-update', keyFileVariable: 'SSH_KEY')]) {
-        sshagent(['k8-image-update']) {
+        withCredentials([sshUserPrivateKey(credentialsId: 'k8-image-update', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
+            withEnv(["GIT_SSH_COMMAND=ssh -o StrictHostKeyChecking=no -o User=${SSH_USER} -i ${SSH_KEY}"]) {
             sh """
             yq --inplace '(.spec.template.spec.containers[] | select(.name=="alpine").image) = "alpine:3.19"' deployment.yml
             git status
@@ -37,7 +38,7 @@ pipeline {
             #git commit -m "test"
             #git push origin master
         """
-        }
+        }}
 
         
 
