@@ -4,6 +4,9 @@ pipeline {
     stage('Test') {
       steps {
 
+        def now = new Date()
+        def time = now.format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
+        
         script {
 
           checkout([
@@ -43,17 +46,14 @@ pipeline {
             """
             }
         }
-        
-        now = new Date()
-        time = now.format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
+
         println ${time}
 
         build job: 'dependent-job', 
         parameters: [
             string(name: 'TEST_PARAM', value: String.valueOf(BUILD_NUMBER) + " TEST"),
         ]
-        
+        }
       }
     }
   }
-}
