@@ -44,8 +44,10 @@ pipeline {
             }
         }
 
-        
-
+        build job: 'dependent-job', 
+        parameters: [
+            string(name: 'TEST_PARAM', value: String.valueOf(BUILD_NUMBER)),
+        ]
         
       }
     }
