@@ -12,9 +12,9 @@ pipeline {
               [name: "master"]
             ],
             doGenerateSubmoduleConfigurations: false,
-            extensions: [
-              [$class: 'CleanCheckout']
-            ],
+            // extensions: [
+            //   [$class: 'CleanCheckout']
+            // ],
             submoduleCfg: [],
             userRemoteConfigs: [
               [credentialsId: 'k8-image-update', url: 'git@github.com:waleedahmeddev/k8-image-update.git']
