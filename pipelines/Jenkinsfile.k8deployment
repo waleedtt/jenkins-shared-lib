@@ -9,7 +9,7 @@ pipeline {
             def time = now.format("yyMMdd.HHmm", TimeZone.getTimeZone('UTC'))
             println time
             println " ${time} here"
-            println ' ${time} here'
+            println 'here ' + ${time} + ' here'
         }
       }
     }
