@@ -12,9 +12,9 @@ pipeline {
               [name: "master"]
             ],
             doGenerateSubmoduleConfigurations: false,
-            // extensions: [
-            //   [$class: 'CleanCheckout']
-            // ],
+            extensions: [
+              [$class: 'CleanCheckout']
+            ],
             submoduleCfg: [],
             userRemoteConfigs: [
               [credentialsId: 'k8-image-update', url: 'git@github.com:waleedahmeddev/k8-image-update.git']
@@ -39,9 +39,10 @@ pipeline {
             git status
             git add .
             git commit -m "test"
-            git push origin master
-        """
-        }}
+            #git push origin master
+            """
+            }
+        }
 
         
 
