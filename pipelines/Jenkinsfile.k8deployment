@@ -22,7 +22,8 @@ pipeline {
           ])
         }
 
-        withCredentials([sshUserPrivateKey(credentialsId: 'k8-image-update', keyFileVariable: 'SSH_KEY')]) {
+        //withCredentials([sshUserPrivateKey(credentialsId: 'k8-image-update', keyFileVariable: 'SSH_KEY')]) {
+        sshagent(['k8-image-update']) {
             sh """
             yq --inplace '(.spec.template.spec.containers[] | select(.name=="alpine").image) = "alpine:3.19"' deployment.yml
             git status
