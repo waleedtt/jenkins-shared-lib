@@ -22,7 +22,8 @@ pipeline {
           ])
         }
 
-        sh """
+        withCredentials([sshUserPrivateKey(credentialsId: 'k8-image-update', keyFileVariable: 'SSH_KEY')]) {
+            sh """
             yq --inplace '(.spec.template.spec.containers[] | select(.name=="alpine").image) = "alpine:3.19"' deployment.yml
             git status
             git fetch
@@ -35,6 +36,9 @@ pipeline {
             #git commit -m "test"
             #git push origin master
         """
+        }
+
+        
 
         
       }
