@@ -6,7 +6,7 @@ pipeline {
         script {
             sh "echo test"
             def now = new Date()
-            def time = now.format("yyMMdd-HHmmss", TimeZone.getTimeZone('UTC'))
+            def time = now.format("yyyyMMdd-HHmmss", TimeZone.getTimeZone('UTC'))
             println time
             println " ${time} here"
             println 'here ' + time + ' here'
