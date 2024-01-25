@@ -35,12 +35,17 @@ pipeline {
     }
 
 
+
     stage('Test1') {
       steps {
         script {
+            println tag
             sh "ls -la"
         }
       }
     }
+
+
+
   }
 }
