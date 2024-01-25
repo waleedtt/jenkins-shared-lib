@@ -15,19 +15,19 @@ pipeline {
             userRemoteConfigs: [[credentialsId: 'k8-image-update', url: 'git@github.com:waleedahmeddev/k8-image-update.git']]
           ])
 
-          sh """
-          yq --inplace '(.spec.template.spec.containers[] | select(.name=="alpine").image) = "alpine:3.19"' deployment.yml
-          """
           
           def now = new Date()
-          def time = now.format("yyyyMMdd-HHmmss", TimeZone.getTimeZone('UTC'))
-          println time
-          println " ${time} here"
-          println 'here ' + time + ' here'
+          def format = now.format("yyyyMMdd-HHmmss", TimeZone.getTimeZone('UTC'))
+          def tag = format + "-" + String.valueOf(BUILD_NUMBER)
+
+          sh """
+          yq --inplace '(.spec.template.spec.containers[] | select(.name=="alpine").image) = "alpine:${tag}"' deployment.yml
+          git diff
+          """
 
           build job: 'dependent-job', 
           parameters: [
-              string(name: 'TEST_PARAM', value: String.valueOf(BUILD_NUMBER) + " TEST"),
+              string(name: 'TEST_PARAM', value: tag),
           ]
           
         }
