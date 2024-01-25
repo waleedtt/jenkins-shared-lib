@@ -8,18 +8,28 @@ pipeline {
 
           checkout([
             $class: 'GitSCM',
-            branches: [
-              [name: "master"]
-            ],
+            branches: [[name: "master"]],
             doGenerateSubmoduleConfigurations: false,
-            extensions: [
-              [$class: 'CleanCheckout']
-            ],
+            extensions: [[$class: 'CleanCheckout']],
             submoduleCfg: [],
-            userRemoteConfigs: [
-              [credentialsId: 'k8-image-update', url: 'git@github.com:waleedahmeddev/k8-image-update.git']
-            ]
+            userRemoteConfigs: [[credentialsId: 'k8-image-update', url: 'git@github.com:waleedahmeddev/k8-image-update.git']]
           ])
+
+          sh """
+          yq --inplace '(.spec.template.spec.containers[] | select(.name=="alpine").image) = "alpine:3.19"' deployment.yml
+          """
+          
+          def now = new Date()
+          def time = now.format("yyyyMMdd-HHmmss", TimeZone.getTimeZone('UTC'))
+          println time
+          println " ${time} here"
+          println 'here ' + time + ' here'
+
+          build job: 'dependent-job', 
+          parameters: [
+              string(name: 'TEST_PARAM', value: String.valueOf(BUILD_NUMBER) + " TEST"),
+          ]
+          
         }
 
         //withCredentials([sshUserPrivateKey(credentialsId: 'k8-image-update', keyFileVariable: 'SSH_KEY')]) {
