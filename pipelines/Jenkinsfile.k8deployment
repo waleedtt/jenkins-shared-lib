@@ -22,7 +22,6 @@ pipeline {
 
           sh """
           yq --inplace '(.spec.template.spec.containers[] | select(.name=="alpine").image) = "alpine:${tag}"' deployment.yml
-          git diff
           """
 
           build job: 'dependent-job', 
@@ -32,6 +31,15 @@ pipeline {
           
         }
 
+      }
+    }
+
+
+    stage('Test') {
+      steps {
+        script {
+            sh "ls -la"
+        }
       }
     }
   }
