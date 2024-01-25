@@ -1,11 +1,11 @@
+def now = new Date()
+def format = now.format("yyyyMMdd-HHmmss", TimeZone.getTimeZone('UTC'))
+def tag = format + "-" + String.valueOf(BUILD_NUMBER)
+
 pipeline {
   agent any
   stages {
 
-    def now = new Date()
-    def format = now.format("yyyyMMdd-HHmmss", TimeZone.getTimeZone('UTC'))
-    def tag = format + "-" + String.valueOf(BUILD_NUMBER)
-    
     stage('Test') {
       steps {
 
@@ -19,9 +19,6 @@ pipeline {
             submoduleCfg: [],
             userRemoteConfigs: [[credentialsId: 'k8-image-update', url: 'git@github.com:waleedahmeddev/k8-image-update.git']]
           ])
-
-          
-          
 
           sh """
           yq --inplace '(.spec.template.spec.containers[] | select(.name=="alpine").image) = "alpine:${tag}"' deployment.yml
