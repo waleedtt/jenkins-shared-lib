@@ -1,6 +1,11 @@
 pipeline {
   agent any
   stages {
+
+    def now = new Date()
+    def format = now.format("yyyyMMdd-HHmmss", TimeZone.getTimeZone('UTC'))
+    def tag = format + "-" + String.valueOf(BUILD_NUMBER)
+    
     stage('Test') {
       steps {
 
@@ -16,9 +21,7 @@ pipeline {
           ])
 
           
-          def now = new Date()
-          def format = now.format("yyyyMMdd-HHmmss", TimeZone.getTimeZone('UTC'))
-          def tag = format + "-" + String.valueOf(BUILD_NUMBER)
+          
 
           sh """
           yq --inplace '(.spec.template.spec.containers[] | select(.name=="alpine").image) = "alpine:${tag}"' deployment.yml
