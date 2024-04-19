@@ -40,9 +40,7 @@ pipeline {
             //     value:"select1,select2"
             // ),
 
-            choice(
-            name: 'CHOICE', choices: ["Test1", "Test2", "Test3"], description: "Select Here"
-            )
+            choice(name: 'CHOICE', choices: ["Test1", "Test2", "Test3"], description: "Select Here")
         ]
     }
 
