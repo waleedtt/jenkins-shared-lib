@@ -10,6 +10,7 @@ pipeline {
                     build job: 'extended-choice-main-dep', 
                     parameters: [
                         string(name: 'TEST_PARAM', value: String.valueOf(BUILD_NUMBER)),
+                        extendedChoice(name: 'IMAGE_TAG', value: String.valueOf(BUILD_NUMBER)),
                     ]
                 }
 
