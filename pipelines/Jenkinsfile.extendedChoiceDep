@@ -18,6 +18,10 @@ pipeline {
             return tags
             """
         )
+
+        choice(
+          name: 'CHOICE', choices: ["Test1", "Test2", "Test3"], description: "Select '${imageRepo}' existing version or create NEW_BUILD."
+        )
     }
 
     stages {
