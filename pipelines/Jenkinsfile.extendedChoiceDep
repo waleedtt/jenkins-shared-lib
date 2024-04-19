@@ -5,7 +5,7 @@ pipeline {
         string(name: 'TEST_PARAM', defaultValue: 'testing', description: 'testing')
         extendedChoice(
             name: "IMAGE_TAG",
-            description: "Select '${IMAGE_REPO}' existing version or create NEW_BUILD.",
+            description: "Select Any",
             defaultValue: "--------",
             type: "PT_SINGLE_SELECT",
             visibleItemCount: 5,
