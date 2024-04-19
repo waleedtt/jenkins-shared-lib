@@ -12,6 +12,8 @@ pipeline {
                         string(name: 'TEST_PARAM', value: String.valueOf(BUILD_NUMBER)),
                     ]
                 }
+
+                sh "echo  Testing Completed"
             }
         }
     }
