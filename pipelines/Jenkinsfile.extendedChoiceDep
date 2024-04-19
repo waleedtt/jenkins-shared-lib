@@ -50,7 +50,7 @@ pipeline {
               sh "echo  ${params.TEST_PARAM}"
               sh """
                     echo TEST_PARAM ${params.TEST_PARAM}
-                    echo EXTENDED ${params.EXTENDED}
+                    #echo EXTENDED ${params.EXTENDED}
                     echo EXTENDED ${params.CHOICE}
                 """
             }
