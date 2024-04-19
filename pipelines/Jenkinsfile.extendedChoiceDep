@@ -3,9 +3,9 @@ pipeline {
 
     parameters {
         string(name: 'TEST_PARAM', defaultValue: 'testing', description: 'testing')
-        
+
         extendedChoice(
-            name: "IMAGE_TAG",
+            name: "EXTENDED",
             description: "Select Any",
             defaultValue: "select1",
             type: "PT_SINGLE_SELECT",
@@ -25,8 +25,8 @@ pipeline {
             steps {
               sh "echo  ${params.TEST_PARAM}"
               sh """
-                    echo ${params.TEST_PARAM}
-                    echo ${params.IMAGE_TAG}
+                    echo TEST_PARAM ${params.TEST_PARAM}
+                    echo EXTENDED ${params.EXTENDED}
                 """
             }
         }
