@@ -48,6 +48,17 @@ pipeline {
 
 
     stages {
+
+        stage('Init') {
+            steps {
+                script {
+                    properties([
+                        parameters(defineParameters(CHOICE, ["--------", "NEW_BUILD"]))
+                    ])
+                }
+            }
+    }
+
         stage('test') {
             steps {
               sh "echo  ${params.TEST_PARAM}"
