@@ -10,6 +10,7 @@ pipeline {
             defaultValue: "select1",
             type: "PT_SINGLE_SELECT",
             visibleItemCount: 5,
+            value:"select1,select2"
             // multiSelectDelimiter: ",",
             // groovyScript: """
             // def tags = []
