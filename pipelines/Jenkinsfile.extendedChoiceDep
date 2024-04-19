@@ -1,5 +1,5 @@
 
-def defineParameters(String imageRepo, List<String> imageTags) {
+def defineParameters(String imageRepo, String imageTags) {
     return [
 
         string(name: 'TEST_PARAM', defaultValue: 'testing', description: 'testing'),
