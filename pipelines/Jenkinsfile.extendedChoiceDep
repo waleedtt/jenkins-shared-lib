@@ -1,3 +1,22 @@
+
+def defineParameters(String imageRepo, List<String> imageTags) {
+    return [
+
+        string(name: 'TEST_PARAM', defaultValue: 'testing', description: 'testing'),
+
+        // extendedChoice(
+        //     name: "EXTENDED",
+        //     description: "Select Any",
+        //     defaultValue: "select1",
+        //     type: "PT_SINGLE_SELECT",
+        //     visibleItemCount: 5,
+        //     value:"select1,select2"
+        // ),
+
+        choice(name: 'CHOICE', choices: ["Test1", "Test2", "Test3"], description: "Select Here"),
+    ]
+}
+
 pipeline {
     agent any
 
@@ -26,23 +45,7 @@ pipeline {
     //     )
     // }
 
-    def defineParameters(String imageRepo, List<String> imageTags) {
-        return [
 
-            string(name: 'TEST_PARAM', defaultValue: 'testing', description: 'testing'),
-
-            // extendedChoice(
-            //     name: "EXTENDED",
-            //     description: "Select Any",
-            //     defaultValue: "select1",
-            //     type: "PT_SINGLE_SELECT",
-            //     visibleItemCount: 5,
-            //     value:"select1,select2"
-            // ),
-
-            choice(name: 'CHOICE', choices: ["Test1", "Test2", "Test3"], description: "Select Here"),
-        ]
-    }
 
     stages {
         stage('test') {
