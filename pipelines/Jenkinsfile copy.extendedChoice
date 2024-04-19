@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('test') {
+            steps {
+                sh "echo  Testing"
+
+                script {
+                    build job: 'extended-choice-main-dep', 
+                    parameters: [
+                        string(name: 'TEST_PARAM', value: String.valueOf(BUILD_NUMBER)),
+                    ]
+                }
+            }
+        }
+    }
+}

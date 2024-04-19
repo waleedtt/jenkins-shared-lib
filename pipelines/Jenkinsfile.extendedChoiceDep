@@ -3,6 +3,7 @@ pipeline {
 
     parameters {
         string(name: 'TEST_PARAM', defaultValue: 'testing', description: 'testing')
+        
         extendedChoice(
             name: "IMAGE_TAG",
             description: "Select Any",
