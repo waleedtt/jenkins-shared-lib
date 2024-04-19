@@ -1,4 +1,5 @@
 
+def CHOICE = null
 def defineParameters(String imageRepo, List<String> imageTags) {
     return [
 
@@ -47,17 +48,17 @@ pipeline {
 
 
 
-    stages {
+        stages {
 
-        stage('Init') {
-            steps {
-                script {
-                    properties([
-                        parameters(defineParameters(CHOICE, ["--------", "NEW_BUILD"]))
-                    ])
+            stage('Init') {
+                steps {
+                    script {
+                        properties([
+                            parameters(defineParameters(CHOICE, ["--------", "NEW_BUILD"]))
+                        ])
+                    }
                 }
-            }
-    }
+        }
 
         stage('test') {
             steps {
