@@ -54,7 +54,7 @@ pipeline {
                 steps {
                     script {
                         properties([
-                            parameters()
+                            parameters(defineParameters(CHOICE1, ["--------", "NEW_BUILD"]))
                         ])
                     }
                 }
