@@ -6,14 +6,14 @@ pipeline {
         extendedChoice(
             name: "IMAGE_TAG",
             description: "Select Any",
-            defaultValue: "--------",
+            defaultValue: "select1",
             type: "PT_SINGLE_SELECT",
             visibleItemCount: 5,
             multiSelectDelimiter: ",",
             groovyScript: """
             def tags = []
-            tags.add(0, "NEW_BUILD")
-            tags.add(0, "--------")
+            tags.add(0, "select1")
+            tags.add(0, "select2")
             return tags
             """
         )
