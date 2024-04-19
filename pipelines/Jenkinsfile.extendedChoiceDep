@@ -3,6 +3,20 @@ pipeline {
 
     parameters {
         string(name: 'TEST_PARAM', defaultValue: 'testing', description: 'testing')
+
+        extendedChoice(
+            name: "IMAGE_TAG",
+            description: "Select '${IMAGE_REPO}' existing version or create NEW_BUILD.",
+            defaultValue: "--------",
+            type: "PT_SINGLE_SELECT",
+            visibleItemCount: 5,
+            multiSelectDelimiter: ",",
+            groovyScript: """def tags = []
+            tags.add(0, "NEW_BUILD")
+            tags.add(0, "--------")
+
+            return tags"""
+        )
     }
 
     stages {
