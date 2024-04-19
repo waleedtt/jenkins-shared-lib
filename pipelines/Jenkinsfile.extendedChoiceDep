@@ -25,6 +25,7 @@ pipeline {
               sh "echo  ${params.TEST_PARAM}"
               sh """
                     echo ${params.TEST_PARAM}
+                    echo ${params.IMAGE_TAG}
                 """
             }
         }
