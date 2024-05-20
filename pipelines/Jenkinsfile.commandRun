@@ -1,15 +1,22 @@
 pipeline {
     agent any
+
+    environment {
+        mytest = credentials('my-simple-ec2')
+    }
+
+
     stages {
         stage('Test') {
             steps {
                 sh """
                 echo helloworld
+                echo $mytest
                 """
 
-                sshagent (credentials: ['my-simple-ec2']) {
-                    sh "ssh -o StrictHostKeyChecking=no -l ubuntu 47.128.249.187 'whoami'"
-                }
+                // sshagent (credentials: ['my-simple-ec2']) {
+                //     sh "ssh -o StrictHostKeyChecking=no -l ubuntu 47.128.249.187 'whoami'"
+                // }
             }
         }
     }
