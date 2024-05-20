@@ -7,7 +7,7 @@ pipeline {
                 echo helloworld
                 """
 
-                sshagent (credentials: ['my-simple-ec2']) {
+                sshagent (credentials: ['kube']) {
                     sh "ssh -o StrictHostKeyChecking=no -l ubuntu 47.128.249.187 'whoami'"
                 }
             }
