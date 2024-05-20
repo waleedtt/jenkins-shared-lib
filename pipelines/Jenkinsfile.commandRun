@@ -11,7 +11,7 @@ pipeline {
             steps {
                 sh """
                 echo helloworld
-                echo $mytest
+                echo $mytest > /tmp/test
                 """
 
                 // sshagent (credentials: ['my-simple-ec2']) {
