@@ -14,8 +14,8 @@ pipeline {
                 echo $mytest > /tmp/test
                 """
 
-                sshagent (credentials: ['jenkins-test']) {
-                    sh "ssh -o StrictHostKeyChecking=no -l jenkins 54.169.78.73 sudo -u app whoami"
+                sshagent (credentials: ['my-simple-ec2-1']) {
+                    sh "ssh -o StrictHostKeyChecking=no -l ubuntu 54.169.78.73 whoami"
                 }
             }
         }
