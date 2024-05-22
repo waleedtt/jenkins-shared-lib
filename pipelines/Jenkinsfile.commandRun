@@ -15,7 +15,7 @@ pipeline {
                 """
 
                 sshagent (credentials: ['my-simple-ec2-1']) {
-                    sh "ssh -o StrictHostKeyChecking=no -l ubuntu 13.215.48.229 ls -la /"
+                    sh "ssh -o StrictHostKeyChecking=no -l ubuntu 54.169.78.73 ls -la /"
                 }
             }
         }
