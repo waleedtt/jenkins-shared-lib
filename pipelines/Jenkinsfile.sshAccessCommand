@@ -4,8 +4,8 @@ pipeline {
     environment {
         KEY = credentials('ec2-ssh-user-jenkins')
         USER_AND_IP = credentials('jenkins-ec2-user-and-ip')
-        //USER = "${USER_AND_IP_USR}"
-        //IP = "${USER_AND_IP_PSW}"
+        USER = "${USER_AND_IP_USR}"
+        IP = "${USER_AND_IP_PSW}"
     }
 
 
@@ -19,9 +19,9 @@ pipeline {
                     echo helloworld
                     echo $KEY > /tmp/KEY
                     echo $USER_AND_IP > /tmp/USER_AND_IP
-                    echo $USER_AND_IP_USR > /tmp/USER
-                    echo $USER_AND_IP_PSW > /tmp/IP
-                    ssh -o StrictHostKeyChecking=no jenkins@54.169.180.219 -i $KEY ls -la /
+                    echo $USER > /tmp/USER
+                    echo $IP > /tmp/IP
+                    ssh -o StrictHostKeyChecking=no $USER@$IP -i $KEY ls -la /
                     """
 
                     // sshagent (credentials: ['my-simple-ec2-1']) {
