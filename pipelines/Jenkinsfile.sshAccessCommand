@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                def (user, ip) = userIP.tokenize( ':' )
+                (user, ip) = userIP.tokenize( ':' )
                 sh """
                 echo helloworld
                 echo $key > /tmp/test
