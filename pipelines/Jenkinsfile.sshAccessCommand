@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         key = credentials('ec2-ssh-user-jenkins')
+        userIP = credentials('jenkins-ec2-user-and-ip')
     }
 
 
@@ -11,8 +12,8 @@ pipeline {
             steps {
                 sh """
                 echo helloworld
-                #echo $key > /tmp/test
-
+                echo $key > /tmp/test
+                echo $userIP > /tmp/test1
                 ssh -o StrictHostKeyChecking=no jenkins@54.169.180.219 -i $key ls -la /
                 """
 
