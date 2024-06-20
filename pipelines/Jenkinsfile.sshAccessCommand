@@ -4,8 +4,8 @@ pipeline {
     environment {
         KEY = credentials('ec2-ssh-user-jenkins')
         USER_AND_IP = credentials('jenkins-ec2-user-and-ip')
-        USER = "${USER_AND_IP_USR}"
-        IP = "${USER_AND_IP_PSW}"
+        //USER = "${USER_AND_IP_USR}"
+        //IP = "${USER_AND_IP_PSW}"
     }
 
 
