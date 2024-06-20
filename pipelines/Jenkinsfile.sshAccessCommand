@@ -11,23 +11,15 @@ pipeline {
 
     stages {
         stage('Test') {
-            
             steps {
-                //scripts {
-                    //def (user, ip) = "asd:zxc".tokenize( ':' )
-                    sh """
-                    echo helloworld
-                    echo $KEY > /tmp/KEY
-                    echo $USER_AND_IP > /tmp/USER_AND_IP
-                    echo $USER > /tmp/USER
-                    echo $IP > /tmp/IP
-                    ssh -o StrictHostKeyChecking=no $USER@$IP -i $KEY ls -la /
-                    """
-
-                    // sshagent (credentials: ['my-simple-ec2-1']) {
-                    //     sh "ssh -o StrictHostKeyChecking=no -l ubuntu 54.169.78.73 whoami"
-                    // }
-                //}
+                sh """
+                echo helloworld
+                echo $KEY > /tmp/KEY
+                echo $USER_AND_IP > /tmp/USER_AND_IP
+                echo $USER > /tmp/USER
+                echo $IP > /tmp/IP
+                ssh -o StrictHostKeyChecking=no $USER@$IP -i $KEY ls -la /
+                """
             }
         }
     }
