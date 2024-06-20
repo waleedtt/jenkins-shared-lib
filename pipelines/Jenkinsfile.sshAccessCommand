@@ -13,7 +13,7 @@ pipeline {
                 echo helloworld
                 #echo $key > /tmp/test
 
-                ssh jenkins@54.169.180.219 -i $key ls -la /
+                ssh -o StrictHostKeyChecking=no jenkins@54.169.180.219 -i $key ls -la /
                 """
 
                 // sshagent (credentials: ['my-simple-ec2-1']) {
