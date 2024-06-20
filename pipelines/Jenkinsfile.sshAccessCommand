@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        mytest = credentials('my-simple-ec2')
+        key = credentials('ec2-ssh-user-jenkins')
     }
 
 
@@ -11,7 +11,9 @@ pipeline {
             steps {
                 sh """
                 echo helloworld
-                #echo $mytest > /tmp/test
+                #echo $key > /tmp/test
+
+                ssh jenkins@54.169.180.219 -i $key ls -la /
                 """
 
                 // sshagent (credentials: ['my-simple-ec2-1']) {
