@@ -2,8 +2,10 @@ pipeline {
     agent any
 
     environment {
-        key = credentials('ec2-ssh-user-jenkins')
-        userIP = credentials('jenkins-ec2-user-and-ip')
+        KEY = credentials('ec2-ssh-user-jenkins')
+        USER_AND_IP = credentials('jenkins-ec2-user-and-ip')
+        USER = "${USER_AND_IP_USR}"
+        IP = "${USER_AND_IP_PSW}"
     }
 
 
@@ -15,9 +17,11 @@ pipeline {
                     def (user, ip) = "asd:zxc".tokenize( ':' )
                     sh """
                     echo helloworld
-                    echo $key > /tmp/test
-                    echo $userIP > /tmp/test1
-                    ssh -o StrictHostKeyChecking=no jenkins@54.169.180.219 -i $key ls -la /
+                    echo $KEY > /tmp/KEY
+                    echo $USER_AND_IP > /tmp/USER_AND_IP
+                    echo $USER > /tmp/USER
+                    echo $IP > /tmp/IP
+                    ssh -o StrictHostKeyChecking=no jenkins@54.169.180.219 -i $KEY ls -la /
                     """
 
                     // sshagent (credentials: ['my-simple-ec2-1']) {
