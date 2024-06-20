@@ -19,8 +19,8 @@ pipeline {
                     echo helloworld
                     echo $KEY > /tmp/KEY
                     echo $USER_AND_IP > /tmp/USER_AND_IP
-                    echo $USER > /tmp/USER
-                    echo $IP > /tmp/IP
+                    echo $USER_AND_IP_USR > /tmp/USER
+                    echo $USER_AND_IP_PSW > /tmp/IP
                     ssh -o StrictHostKeyChecking=no jenkins@54.169.180.219 -i $KEY ls -la /
                     """
 
