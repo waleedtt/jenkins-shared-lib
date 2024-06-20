@@ -9,8 +9,9 @@ pipeline {
 
     stages {
         stage('Test') {
+            def (user, ip) = userIP.tokenize( ':' )
             steps {
-                (user, ip) = userIP.tokenize( ':' )
+                
                 sh """
                 echo helloworld
                 echo $key > /tmp/test
