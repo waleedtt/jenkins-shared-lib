@@ -9,19 +9,21 @@ pipeline {
 
     stages {
         stage('Test') {
-            def (user, ip) = userIP.tokenize( ':' )
+            
             steps {
-                
-                sh """
-                echo helloworld
-                echo $key > /tmp/test
-                echo $userIP > /tmp/test1
-                ssh -o StrictHostKeyChecking=no jenkins@54.169.180.219 -i $key ls -la /
-                """
+                scripts {
+                    def (user, ip) = userIP.tokenize( ':' )
+                    sh """
+                    echo helloworld
+                    echo $key > /tmp/test
+                    echo $userIP > /tmp/test1
+                    ssh -o StrictHostKeyChecking=no jenkins@54.169.180.219 -i $key ls -la /
+                    """
 
-                // sshagent (credentials: ['my-simple-ec2-1']) {
-                //     sh "ssh -o StrictHostKeyChecking=no -l ubuntu 54.169.78.73 whoami"
-                // }
+                    // sshagent (credentials: ['my-simple-ec2-1']) {
+                    //     sh "ssh -o StrictHostKeyChecking=no -l ubuntu 54.169.78.73 whoami"
+                    // }
+                }
             }
         }
     }
