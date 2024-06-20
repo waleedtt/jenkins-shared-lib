@@ -13,7 +13,7 @@ pipeline {
         stage('Test') {
             
             steps {
-                scripts {
+                //scripts {
                     //def (user, ip) = "asd:zxc".tokenize( ':' )
                     sh """
                     echo helloworld
@@ -27,7 +27,7 @@ pipeline {
                     // sshagent (credentials: ['my-simple-ec2-1']) {
                     //     sh "ssh -o StrictHostKeyChecking=no -l ubuntu 54.169.78.73 whoami"
                     // }
-                }
+                //}
             }
         }
     }
