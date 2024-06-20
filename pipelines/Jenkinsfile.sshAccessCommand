@@ -14,7 +14,7 @@ pipeline {
             
             steps {
                 scripts {
-                    def (user, ip) = "asd:zxc".tokenize( ':' )
+                    //def (user, ip) = "asd:zxc".tokenize( ':' )
                     sh """
                     echo helloworld
                     echo $KEY > /tmp/KEY
